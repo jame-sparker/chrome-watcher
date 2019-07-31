@@ -1,19 +1,17 @@
-let changeColor = document.getElementById('changeColor');
+console.log("popup js loaded");
 
-chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
-});
+let submit = document.getElementById('submit');
+console.log("setting onclick");
 
-changeColor.onclick = function(element) {
-  let color = element.target.value;
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.tabs.executeScript(
-        tabs[0].id,
-        {code: 'document.body.style.backgroundColor = "' + color + '";'});
-  });
+submit.onclick = (element) => {
+    console.log("sending message");
+    chrome.runtime.sendMessage({
+        msg: "something_completed",
+        data: {
+            url: "Loading",
+            type: "Just completed!"
+        }
+    });
 };
 
-
-//chrome.tabs.create
 // chrome.storage.local.set

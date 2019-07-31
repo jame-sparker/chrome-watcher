@@ -4,7 +4,10 @@
   // "default_locale": "en",
   "description": "Chrome watcher is a website watcher for chrome.",
 
-  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "permissions": [
+    "storage",
+    "https://*/"
+  ],
   "options_page": "options/options.html",
 
   "background": {
