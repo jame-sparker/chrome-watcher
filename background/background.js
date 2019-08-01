@@ -1,25 +1,23 @@
-chrome.runtime.onInstalled.addListener(() => {
-    // initial setup or updated
-    // default setting ?
-    console.log("installed");
-});
+const THIRTY_MINUTES = 1000 * 60 * 30;
 
-chrome.runtime.onStartup.addListener(() => {
-    conosole.log("startup");
+let rm = null;
 
-    chrome.storage.local.get(['requests'], function(result) {
-        let requests = result.variable;
-
-    });
-});
-
-
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        if (request.msg === "something_completed") {
-            //  To do something
-            console.log("received message");
-            console.log(request.data.content)
-        }
+let startUp = () => {
+    console.log("start up");
+    if (rm === null) {
+        rm = new RequestManager((url) => {console.log(`${url} is updated`)}, THIRTY_MINUTES);
     }
-);
+};
+
+chrome.runtime.onInstalled.addListener(startUp);
+chrome.runtime.onStartup.addListener(startUp);
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    startUp();
+    if (request.msg === "something_completed") {
+        //  To do something
+        console.log("received message");
+        console.log(request.data.content)
+    }
+    rm.addTagRequest("https://aumo.jp/articles/24525", "body", 5000);
+});

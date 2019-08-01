@@ -3,7 +3,7 @@
   Works because js all functions in js runs to completion.
 */
 
-export class IntervalHandler {
+class IntervalHandler {
   constructor() {
     this.timers = {};
   }
@@ -24,6 +24,7 @@ export class IntervalHandler {
 
   removeTimer(f) {
     clearTimeout(this.timers[f]);
+    delete this.timers[f];
   }
 
   updateInterval(f, interval) {
