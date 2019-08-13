@@ -10,7 +10,7 @@ class Requestor {
                 let parser = new DOMParser();
                 return parser.parseFromString(html, "text/html");
             }).catch((error) =>
-                console.error(error)
+                console.log('This error occurred while fetching data' + error)
             );
     }
 
@@ -22,13 +22,15 @@ class Requestor {
 
     fetchTags(tagName) {
         return this.fetchUrl().then(doc => {
-            return doc.getElementsByTagName(tagName).map(tag => tag.outerHTML).join();
+            let doms = [...doc.getElementsByTagName(tagName)];
+            return doms.map(tag => tag.outerHTML).join();
         });
     }
 
     fetchClass(className) {
         return this.fetchUrl().then(doc => {
-            return doc.getElementsByClassName(className).map(tag => tag.outerHTML).join();
+            let doms = [...doc.getElementsByClassName(className)];
+            return doms.map(tag => tag.outerHTML).join();
         });
     }
 

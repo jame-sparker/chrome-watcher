@@ -1,11 +1,13 @@
 const THIRTY_MINUTES = 1000 * 60 * 30;
 
 let rm = null;
+let bm = null;
+let time = null;
 
 let startUp = () => {
-    console.log("start up");
     if (rm === null) {
-        rm = new RequestManager((url) => {console.log(`${url} is updated`)}, THIRTY_MINUTES);
+        bm = new BadgeManager();
+        rm = new RequestManager(bm.notifyUpdate, THIRTY_MINUTES);
     }
 };
 
@@ -14,10 +16,18 @@ chrome.runtime.onStartup.addListener(startUp);
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     startUp();
-    if (request.msg === "something_completed") {
-        //  To do something
-        console.log("received message");
-        console.log(request.data.content)
+    if (request.msg === "request-received") {
+        let data = request.data;
+        let settings = [data.type, data.option];
+        rm.addRequest(data.type, data.url, data.option, THIRTY_MINUTES, settings);
+
+    } else if (request.msg === "delete") {
+        let url = request.data.url;
+        rm.removeRequest(url);
+        bm.updateChecked(url);
+    } else if (request.msg === "checked") {
+        let url = request.data.url;
+        bm.updateChecked(url);
     }
-    rm.addTagRequest("https://aumo.jp/articles/24525", "body", 5000);
+    console.log(request.msg);
 });

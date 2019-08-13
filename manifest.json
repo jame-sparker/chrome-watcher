@@ -6,7 +6,7 @@
 
   "permissions": [
     "storage",
-    "https://*/"
+    "*://*/"
   ],
   "options_page": "options/options.html",
 
@@ -15,7 +15,8 @@
         "background/interval-handler.js",
         "background/request-manager.js",
         "background/requestor.js",
-        "background/background.js"
+        "background/background.js",
+        "background/badge-manager.js"
       ],
       "persistent": false
   },

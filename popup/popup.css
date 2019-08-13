@@ -29,11 +29,11 @@ th {
     text-align: center;
 }
 
-#confirm {
+.confirm {
     background: #25d467;
 }
 
-#confirm:hover {
+.confirm:hover {
     background: #80d4a1;
 }
 
@@ -53,3 +53,15 @@ svg {
     margin: auto;
     fill: white;
 }
+
+a {
+    color: blue;
+}
+
+.arrow {
+    fill: blue;
+    vertical-align: text-bottom;
+    display: inline;
+    height: 15px;
+}
+

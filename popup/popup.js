@@ -3,53 +3,113 @@ const newButton = document.getElementById("new-button");
 
 newButton.onclick = insertNewInputRow;
 
+window.onload = () => {
+    console.log('records');
+    chrome.storage.local.get('updatedUrls', (updatedUrls) => {
+        console.log(updatedUrls);
+        chrome.storage.local.get('htmlRecords', (value) => {
+            let records = value.htmlRecords || {};
+            console.log(records);
 
-ts.onchange = () => {
-    let selectType = ts.options[ts.selectedIndex].value;
-    let option = document.getElementById("option");
-
-    option.disabled = selectType === "none";
+            Object.keys(records).forEach(url => {
+                let [oldHtml, newHtml, interval, settings] = records[url];
+                console.log(records[url]);
+                let [type, option] = settings;
+                let isHighlight = url in updatedUrls;
+                insertNewDataRow(url, type, option, isHighlight);
+            });
+        });
+    });
 };
 
-confirm.onclick = (event) => {
-    let url = document.getElementById("url").value;
-    let ts = document.getElementById("type-selector");
-    let selectType = ts.options[ts.selectedIndex].value;
-    let option = document.getElementById("option").value;
+function onSelectChange(e) {
+    console.log("selected");
+    let ts = e.target;
+    let selectedType = ts.options[ts.selectedIndex].value;
+    console.log(selectedType);
 
-    table.deleteRow(getRowNumber(event.target));
+    let rowElements = ts.parentNode.parentNode.children;
+    let option = rowElements[2].children[0];
+    option.disabled = selectedType === "None";
+}
+
+function confirm(event) {
+    let confirmButton = event.target;
+    while(confirmButton && confirmButton.tagName !== "BUTTON") {
+        confirmButton = confirmButton.parentNode;
+    }
+    let rowElems = confirmButton.parentNode.parentNode.children;
+
+    let url = rowElems[0].children[0].value;
+    let ts = rowElems[1].children[0]; // type selector
+    let selectedType = ts.options[ts.selectedIndex].value;
+    let option = rowElems[2].children[0].value || "";
+
+    table.deleteRow(getRowNumber(confirmButton));
+    insertNewDataRow(url, selectedType, option);
 
 
-    console.log("sending message");
-    // chrome.runtime.sendMessage({
-    //     msg: "something_completed",
-    //     data: {
-    //         url: "Loading",
-    //         type: "Just completed!"
-    //     }
-    // });
-};
+    chrome.runtime.sendMessage({
+        msg: "request-received",
+        data: {
+            url: url,
+            type: selectedType,
+            option: option,
+        }
+    });
+}
+
+function deleteRequest(e) {
+    // get url and send delete request to background
+    let row = e.target;
+    while (row && row.parentElement.parentElement !== table) {
+        row = row.parentElement;
+    }
+    let url = row.children[0].innerHTML;
+
+    chrome.runtime.sendMessage({
+        msg: "delete",
+        data: {
+            url: url
+        }
+    });
+
+    table.deleteRow(getRowNumber(e.target));
+}
+
+function checkRequest(link) {
+    console.log("checked");
+    // get url and send delete request to background
+    let url = link.innerHTML;
+    chrome.runtime.sendMessage({
+        msg: "checked",
+        data: {
+            url: url
+        }
+    });
+    return false;
+}
 
 function insertNewInputRow() {
     let row = `
     <tr>
         <td>
-            <input id="url" placeholder="https://youtu.be/kT2Gd4V5rrQ" type="text" name="url">
+            <input placeholder="https://youtu.be/kT2Gd4V5rrQ" type="text" name="url">
         </td>
         <td>
-            <select id="type-selector">
-                <option value="none">None</option>
-                <option value="tag">Tag</option>
-                <option value="class">Class</option>
-                <option value="id">ID</option>
-                <option value="regex">Regex</option>
+            <select>
+                <option value="None">None</option>
+                <option value="Tag">Tag</option>
+                <option value="Class">Class</option>
+                <option value="Id">ID</option>
+                <option value="Regex">Regex</option>
             </select>
         </td>
         <td>
-            <input id="option" disabled placeholder="" type="text" name="option">
+            <input class disabled placeholder="" type="text" name="option">
         </td>
         <td>
-            <button id="confirm" class="btn-circle">
+            <button class="confirm btn-circle">
                 <svg  class="octicon octicon-check" viewBox="0 0 12 16" version="1.1"  aria-hidden="true">
                     <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"></path>
                 </svg>
@@ -57,12 +117,34 @@ function insertNewInputRow() {
         </td>
     </tr>`;
     insertNewRow(row);
+
+    let classes = document.getElementsByClassName("confirm");
+    Array.from(classes).forEach((e) =>{
+        e.onclick = confirm;
+    });
+
+    let dropdowns = document.getElementsByTagName('select');
+    Array.from(dropdowns).forEach((e) =>{
+        console.log(e);
+        e.onchange = onSelectChange;
+    });
+
 }
 
-function insertNewDataRow(url, type, option) {
+function insertNewDataRow(url, type, option, isHighlight) {
+
+    let arrow = '';
+    if (isHighlight) {
+        arrow = `
+            <svg class="arrow" viewBox="0 0 8 16" version="1.1" aria-hidden="true">
+                <path fill-rule="evenodd" d="M7.5 8l-5 5L1 11.5 4.75 8 1 4.5 2.5 3l5 5z"></path>
+            </svg>
+        `
+    }
+
     let row = `
         <tr>
-            <td>${url}</td>
+            <td>${arrow}<a href="${url}" target="_blank">${url}</a></td>
             <td>${type}</td>
             <td>${option}</td>
             <td>
@@ -74,10 +156,25 @@ function insertNewDataRow(url, type, option) {
             </td>
         </tr>`;
     insertNewRow(row);
+
+    let classes = document.getElementsByClassName("delete");
+    Array.from(classes).forEach((e) =>{
+        e.onclick = deleteRequest;
+    });
+
+    let anchors = document.getElementsByTagName("a");
+
+    for (let i = 0; i < anchors.length ; i++) {
+        anchors[i].onclick = (event) => {
+            event.preventDefault();
+            let win = window.open(this.href, '_blank');
+            win.focus();
+        };
+    }
+
 }
 
 function insertNewRow(row) {
-    console.log('inserting');
     table.children[0].insertAdjacentHTML('beforeend', row);
 
 }
