@@ -41,7 +41,7 @@ th {
     fill: black;
 }
 
-.footer {
+.footer>button{
     float: right;
     margin-right: 10px;
     margin-bottom: 5px;
@@ -63,5 +63,15 @@ a {
     vertical-align: text-bottom;
     display: inline;
     height: 15px;
+}
+
+#options {
+    vertical-align: baseline;
+    color: gray;
+    text-decoration: underline;
+    display:inline-block;
+    margin-left: 2px;
+    margin-top: 5px;
+
 }
 

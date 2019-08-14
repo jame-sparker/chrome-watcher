@@ -5,8 +5,9 @@ newButton.onclick = insertNewInputRow;
 
 window.onload = () => {
     console.log('records');
-    chrome.storage.local.get('updatedUrls', (updatedUrls) => {
-        console.log(updatedUrls);
+    chrome.storage.local.get('updatedUrls', (value) => {
+        let updatedUrls = value.updatedUrls || {};
+        console.log('current updates: ', updatedUrls);
         chrome.storage.local.get('htmlRecords', (value) => {
             let records = value.htmlRecords || {};
             console.log(records);
@@ -20,6 +21,12 @@ window.onload = () => {
             });
         });
     });
+
+    console.log(document.getElementById("options"));
+    document.getElementById("options").onclick = (e) => {
+        e.preventDefault();
+        chrome.runtime.openOptionsPage();
+    }
 };
 
 function onSelectChange(e) {
@@ -65,7 +72,7 @@ function deleteRequest(e) {
     while (row && row.parentElement.parentElement !== table) {
         row = row.parentElement;
     }
-    let url = row.children[0].innerHTML;
+    let url = row.children[0].children[1].innerHTML;
 
     chrome.runtime.sendMessage({
         msg: "delete",
@@ -77,10 +84,9 @@ function deleteRequest(e) {
     table.deleteRow(getRowNumber(e.target));
 }
 
-function checkRequest(link) {
+function checkRequest(url) {
     console.log("checked");
     // get url and send delete request to background
-    let url = link.innerHTML;
     chrome.runtime.sendMessage({
         msg: "checked",
         data: {
@@ -165,9 +171,12 @@ function insertNewDataRow(url, type, option, isHighlight) {
     let anchors = document.getElementsByTagName("a");
 
     for (let i = 0; i < anchors.length ; i++) {
+        if (anchors[i].innerHTML === "Options") continue;
         anchors[i].onclick = (event) => {
+            let url = anchors[i].innerHTML;
             event.preventDefault();
-            let win = window.open(this.href, '_blank');
+            checkRequest(url);
+            let win = window.open(url, '_blank');
             win.focus();
         };
     }

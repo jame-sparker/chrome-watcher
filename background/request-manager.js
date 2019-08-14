@@ -16,11 +16,11 @@ class RequestManager {
             that.htmlRecords = value.htmlRecords || {};
 
             Object.keys(that.htmlRecords).forEach((url) => {
+                console.log('start up:', url);
                 let [oldHtml, newHtml, interval, settings] = that.htmlRecords[url];
                 let [type, option] = settings;
                 that.addRequest(type, url, option, interval, settings)
             });
-
         });
     }
 

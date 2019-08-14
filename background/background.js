@@ -7,11 +7,15 @@ let time = null;
 let startUp = () => {
     if (rm === null) {
         bm = new BadgeManager();
-        rm = new RequestManager(bm.notifyUpdate, THIRTY_MINUTES);
+        rm = new RequestManager(url => bm.notifyUpdate(url), THIRTY_MINUTES);
     }
+
 };
 
-chrome.runtime.onInstalled.addListener(startUp);
+chrome.runtime.onInstalled.addListener(() => {
+    chrome.storage.local.set({updatedUrls: {}}, startUp);
+
+});
 chrome.runtime.onStartup.addListener(startUp);
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -23,10 +27,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     } else if (request.msg === "delete") {
         let url = request.data.url;
+        console.log('deleting url', url);
         rm.removeRequest(url);
         bm.updateChecked(url);
     } else if (request.msg === "checked") {
         let url = request.data.url;
+        console.log('checked:', url);
         bm.updateChecked(url);
     }
     console.log(request.msg);
