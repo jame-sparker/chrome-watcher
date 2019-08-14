@@ -1,3 +1,5 @@
+import htmldiff from '../external/htmldiff.min.js'
+
 const table = document.getElementById('request-list');
 const newButton = document.getElementById("new-button");
 
