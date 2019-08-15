@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f195f5ae-ceeb-4a13-9b28-8dad958ed396" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/popup/diff.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/popup/diff.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/options/options.html" afterPath="$PROJECT_DIR$/options/options.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/popup/popup.css" afterPath="$PROJECT_DIR$/popup/popup.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/external/htmldiff.min.js" afterPath="$PROJECT_DIR$/external/htmldiff.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/popup/diff.html" afterPath="$PROJECT_DIR$/popup/diff.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/popup/diff.js" afterPath="$PROJECT_DIR$/popup/diff.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/popup/popup.js" afterPath="$PROJECT_DIR$/popup/popup.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -31,29 +32,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="popup.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="popup.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/popup/popup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="86" column="49" lean-forward="false" selection-start-line="86" selection-start-column="49" selection-end-line="86" selection-end-column="49" />
+            <state relative-caret-position="209">
+              <caret line="11" column="45" lean-forward="false" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="45" />
               <folding>
-                <marker date="1565832166362" expanded="true" signature="3560:4436" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="3573:3673" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="3686:3996" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="3707:3982" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="4009:4099" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="4112:4426" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="4160:4412" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="4267:4390" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="5001:5117" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="5220:5238" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="5220:6643" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="5370:6206" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="5435:6188" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="5550:6162" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="6223:6629" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="6274:6611" ph="..." />
-                <marker date="1565832166362" expanded="true" signature="6379:6585" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="3508:4384" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="3521:3621" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="3634:3944" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="3655:3930" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="3957:4047" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="4060:4374" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="4108:4360" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="4215:4338" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="4949:5065" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="5168:5186" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="5168:6591" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="5318:6154" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="5383:6136" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="5498:6110" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="6171:6577" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="6222:6559" ph="..." />
+                <marker date="1565832330331" expanded="true" signature="6327:6533" ph="..." />
               </folding>
             </state>
           </provider>
@@ -63,7 +64,27 @@
         <entry file="file://$PROJECT_DIR$/popup/diff.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="133">
-              <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+              <caret line="7" column="6" lean-forward="true" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="diff.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/popup/diff.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="diff.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/popup/diff.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -72,18 +93,8 @@
       <file leaf-file-name="htmldiff.min.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/external/htmldiff.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DHTML.js" pinned="false" current-in-tab="false">
-        <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22154">
-              <caret line="1166" column="29" lean-forward="false" selection-start-line="1166" selection-start-column="29" selection-end-line="1166" selection-end-column="29" />
+            <state relative-caret-position="19">
+              <caret line="1" column="56" lean-forward="false" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -99,21 +110,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="options.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/options/options.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="37" lean-forward="false" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="popup.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/popup/popup.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+            <state relative-caret-position="57">
+              <caret line="3" column="8" lean-forward="false" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -150,8 +151,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>updatehtmldata</find>
-      <find>let settings</find>
       <find>newHtml</find>
       <find>removeRequest</find>
       <find>high</find>
@@ -171,15 +170,17 @@
       <find>onclick</find>
       <find>e.preven</find>
       <find>change</find>
-      <find>delete</find>
       <find>set</find>
-      <find>diff</find>
       <find>!==</find>
       <find>disabled</find>
       <find>diffReq</find>
       <find>window</find>
       <find>undefin</find>
       <find>linkCell</find>
+      <find>local</find>
+      <find>get</find>
+      <find>diff</find>
+      <find>delete</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -198,11 +199,13 @@
         <option value="$PROJECT_DIR$/popup/popup.html" />
         <option value="$PROJECT_DIR$/options/options.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/external/htmldiff.min.js" />
         <option value="$PROJECT_DIR$/options/options.html" />
         <option value="$PROJECT_DIR$/popup/popup.css" />
-        <option value="$PROJECT_DIR$/popup/diff.html" />
         <option value="$PROJECT_DIR$/popup/popup.js" />
+        <option value="$PROJECT_DIR$/external/htmldiff.min.js" />
+        <option value="$PROJECT_DIR$/popup/diff.html" />
+        <option value="$PROJECT_DIR$/popup/diff.css" />
+        <option value="$PROJECT_DIR$/popup/diff.js" />
       </list>
     </option>
   </component>
@@ -281,20 +284,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="popup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chrome-watcher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chrome-watcher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="options" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -439,12 +428,12 @@
       <workItem from="1564458597617" duration="42396000" />
       <workItem from="1564841970526" duration="635000" />
       <workItem from="1565677589816" duration="23586000" />
-      <workItem from="1565829180926" duration="2985000" />
+      <workItem from="1565829180926" duration="5570000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69602000" />
+    <option name="totallyTimeSpent" value="72187000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="50" y="30" width="1870" height="1050" extended-state="1" />
@@ -550,23 +539,23 @@
         <state relative-caret-position="228">
           <caret line="12" column="8" lean-forward="false" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
           <folding>
-            <marker date="1565832166362" expanded="true" signature="3560:4436" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="3573:3673" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="3686:3996" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="3707:3982" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="4009:4099" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="4112:4426" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="4160:4412" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="4267:4390" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="5001:5117" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="5220:5238" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="5220:6643" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="5370:6206" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="5435:6188" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="5550:6162" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="6223:6629" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="6274:6611" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="6379:6585" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="3508:4384" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="3521:3621" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="3634:3944" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="3655:3930" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="3957:4047" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="4060:4374" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="4108:4360" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="4215:4338" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="4949:5065" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="5168:5186" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="5168:6591" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="5318:6154" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="5383:6136" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="5498:6110" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="6171:6577" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="6222:6559" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="6327:6533" ph="..." />
           </folding>
         </state>
       </provider>
@@ -692,6 +681,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -751,14 +741,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/external/htmldiff.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/options/options.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -771,22 +753,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="25" column="75" lean-forward="false" selection-start-line="25" selection-start-column="72" selection-end-line="25" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/popup/popup.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/popup/popup.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="47" column="18" lean-forward="true" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -807,37 +773,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/popup/diff.html">
+    <entry file="file://$PROJECT_DIR$/popup/popup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+        <state relative-caret-position="209">
+          <caret line="11" column="45" lean-forward="false" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="45" />
+          <folding>
+            <marker date="1565832330331" expanded="true" signature="3508:4384" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="3521:3621" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="3634:3944" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="3655:3930" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="3957:4047" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="4060:4374" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="4108:4360" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="4215:4338" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="4949:5065" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="5168:5186" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="5168:6591" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="5318:6154" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="5383:6136" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="5498:6110" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="6171:6577" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="6222:6559" ph="..." />
+            <marker date="1565832330331" expanded="true" signature="6327:6533" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/external/htmldiff.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="56" lean-forward="false" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/popup/popup.js">
+    <entry file="file://$PROJECT_DIR$/popup/popup.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="47" column="18" lean-forward="true" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/popup/popup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="8" lean-forward="false" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/popup/diff.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/popup/diff.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="6" lean-forward="true" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/popup/diff.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
-          <caret line="86" column="49" lean-forward="false" selection-start-line="86" selection-start-column="49" selection-end-line="86" selection-end-column="49" />
-          <folding>
-            <marker date="1565832166362" expanded="true" signature="3560:4436" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="3573:3673" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="3686:3996" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="3707:3982" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="4009:4099" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="4112:4426" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="4160:4412" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="4267:4390" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="5001:5117" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="5220:5238" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="5220:6643" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="5370:6206" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="5435:6188" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="5550:6162" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="6223:6629" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="6274:6611" ph="..." />
-            <marker date="1565832166362" expanded="true" signature="6379:6585" ph="..." />
-          </folding>
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
