@@ -38,7 +38,15 @@ th {
 }
 
 .delete:hover *{
-    fill: black;
+    fill: #2e2e2e;
+}
+
+.diff:not(.disabled) {
+    background: #8dea40;
+}
+
+.diff:hover:not(.disabled) *{
+    fill: green;
 }
 
 .footer>button{

@@ -1,4 +1,4 @@
-import htmldiff from '../external/htmldiff.min.js'
+import HtmlDiff from '../external/htmldiff.min.js'
 
 const table = document.getElementById('request-list');
 const newButton = document.getElementById("new-button");
@@ -10,6 +10,7 @@ window.onload = () => {
     chrome.storage.local.get('updatedUrls', (value) => {
         let updatedUrls = value.updatedUrls || {};
         console.log('current updates: ', updatedUrls);
+        
         chrome.storage.local.get('htmlRecords', (value) => {
             let records = value.htmlRecords || {};
             console.log(records);
@@ -19,7 +20,8 @@ window.onload = () => {
                 console.log(records[url]);
                 let [type, option] = settings;
                 let isHighlight = url in updatedUrls;
-                insertNewDataRow(url, type, option, isHighlight);
+                let isDiffAllowed = oldHtml !== undefined && oldHtml !== null;
+                insertNewDataRow(url, type, option, isHighlight, isDiffAllowed);
             });
         });
     });
@@ -31,7 +33,7 @@ window.onload = () => {
     }
 };
 
-function onSelectChange(e) {
+function onDropdownSelect(e) {
     console.log("selected");
     let ts = e.target;
     let selectedType = ts.options[ts.selectedIndex].value;
@@ -55,7 +57,7 @@ function confirm(event) {
     let option = rowElems[2].children[0].value || "";
 
     table.deleteRow(getRowNumber(confirmButton));
-    insertNewDataRow(url, selectedType, option);
+    insertNewDataRow(url, selectedType, option, false, false);
 
 
     chrome.runtime.sendMessage({
@@ -68,13 +70,25 @@ function confirm(event) {
     });
 }
 
-function deleteRequest(e) {
-    // get url and send delete request to background
+function getRowUrlFromEvent(e) {
     let row = e.target;
     while (row && row.parentElement.parentElement !== table) {
         row = row.parentElement;
     }
-    let url = row.children[0].children[1].innerHTML;
+    let linkCell = row.children[0].children;
+    return linkCell[linkCell.length - 1].innerHTML;
+}
+
+function isButtonDisabled(e) {
+    let element = e.target;
+    while (element && element.tagName !== 'BUTTON') {
+        element = element.parentElement;
+    }
+    return element.classList.contains('disabled');
+}
+
+function deleteRequest(e) {
+    let url = getRowUrlFromEvent(e);
 
     chrome.runtime.sendMessage({
         msg: "delete",
@@ -84,6 +98,16 @@ function deleteRequest(e) {
     });
 
     table.deleteRow(getRowNumber(e.target));
+}
+
+function diffRequest(e) {
+    if (isButtonDisabled(e)) return;
+    let url = getRowUrlFromEvent(e);
+
+    chrome.storage.local.set({diffUrl: url}, () => {
+        let win = window.open('diff.html', '_blank');
+        win.focus();
+    });
 }
 
 function checkRequest(url) {
@@ -134,12 +158,12 @@ function insertNewInputRow() {
     let dropdowns = document.getElementsByTagName('select');
     Array.from(dropdowns).forEach((e) =>{
         console.log(e);
-        e.onchange = onSelectChange;
+        e.onchange = onDropdownSelect;
     });
 
 }
 
-function insertNewDataRow(url, type, option, isHighlight) {
+function insertNewDataRow(url, type, option, isHighlight, isDiffAllowed) {
 
     let arrow = '';
     if (isHighlight) {
@@ -150,11 +174,20 @@ function insertNewDataRow(url, type, option, isHighlight) {
         `
     }
 
+    let diffDisabled = isDiffAllowed ? '' : 'disabled';
+
     let row = `
         <tr>
             <td>${arrow}<a href="${url}" target="_blank">${url}</a></td>
             <td>${type}</td>
             <td>${option}</td>
+            <td>
+                <button class="diff btn-circle ${diffDisabled}">
+                    <svg class="octicon octicon-git-compare" viewBox="0 0 14 16" version="1.1" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5 12H4c-.27-.02-.48-.11-.69-.31-.21-.2-.3-.42-.31-.69V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V11c.03.78.34 1.47.94 2.06.6.59 1.28.91 2.06.94h1v2l3-3-3-3v2zM2 1.8c.66 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2C1.35 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2zm11 9.48V5c-.03-.78-.34-1.47-.94-2.06-.6-.59-1.28-.91-2.06-.94H9V0L6 3l3 3V4h1c.27.02.48.11.69.31.21.2.3.42.31.69v6.28A1.993 1.993 0 0 0 12 15a1.993 1.993 0 0 0 1-3.72zm-1 2.92c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path>
+                    </svg>
+                </button>
+            </td>
             <td>
                 <button class="delete btn-circle">
                     <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" aria-hidden="true">
@@ -165,11 +198,19 @@ function insertNewDataRow(url, type, option, isHighlight) {
         </tr>`;
     insertNewRow(row);
 
-    let classes = document.getElementsByClassName("delete");
-    Array.from(classes).forEach((e) =>{
+    /*Delete buttons*/
+    let deleteButtons = document.getElementsByClassName("delete");
+    Array.from(deleteButtons).forEach((e) =>{
         e.onclick = deleteRequest;
     });
 
+    /*Diff buttons*/
+    let diffButtons = document.getElementsByClassName("diff");
+    Array.from(diffButtons).forEach((e) =>{
+        e.onclick = diffRequest;
+    });
+
+    /*links*/
     let anchors = document.getElementsByTagName("a");
 
     for (let i = 0; i < anchors.length ; i++) {
@@ -182,7 +223,6 @@ function insertNewDataRow(url, type, option, isHighlight) {
             win.focus();
         };
     }
-
 }
 
 function insertNewRow(row) {
@@ -190,6 +230,7 @@ function insertNewRow(row) {
 
 }
 
+/*Get row number from an event e*/
 function getRowNumber(e) {
     let row = e;
     while (row && row.parentElement.parentElement !== table) {
