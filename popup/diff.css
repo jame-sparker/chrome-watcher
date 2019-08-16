@@ -1,7 +1,8 @@
-del {
-    background: #ffd0d9;
+ins {
+    background: lightgreen;
+    text-decoration: none;
 }
 
-ins {
-    background: #c0ffd1;
+del {
+    background: pink;
 }

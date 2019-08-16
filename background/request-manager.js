@@ -88,29 +88,31 @@ class RequestManager {
     }
 
     setRequest(requestor, url, interval, settings) {
-        let request = new Requestor(url);
-
         let that = this;
-        this.removeRequest(url).then(() => {
-            let f = () => {
-                requestor().then(html => {
-                    console.log('dict', that.htmlRecords);
-                    if(updateHtmlData(that.htmlRecords, url, html, interval, settings)) {
-                        that.uh(url);
-                    }
-                });
-            };
+        let fid = this.urlDict[url];
 
-            this.urlDict[url] = f;
-            this.ih.callWithInterval(f, interval);
-        });
+        if (fid) {
+            this.ih.removeTimer(fid);
+            delete this.urlDict[url];
+        }
+
+        let f = () => {
+            requestor().then(html => {
+                console.log('dict', that.htmlRecords);
+                if(updateHtmlData(that.htmlRecords, url, html, interval, settings)) {
+                    that.uh(url);
+                }
+            });
+        };
+
+        this.urlDict[url] = this.ih.callWithInterval(f, interval);
     }
 
     removeRequest(url) {
-        let f = this.urlDict[url];
+        let fid = this.urlDict[url];
 
-        if (f) {
-            this.ih.removeTimer(f);
+        if (fid) {
+            this.ih.removeTimer(fid);
             delete this.urlDict[url];
         }
 

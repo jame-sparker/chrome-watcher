@@ -36,7 +36,7 @@ class Requestor {
 
     fetchRegex(regex) {
         return this.fetchUrl().then(doc => {
-            return doc.outerHTML.match(new RegExp(regex, 'g')).join();
+            return doc.documentElement.outerHTML.match(new RegExp(regex, 'g')).join();
         });
     }
 }

@@ -6,6 +6,7 @@
 class IntervalHandler {
   constructor() {
     this.timers = {};
+    this.counter = 0;
   }
   
   callWithInterval(f, interval) {
@@ -13,22 +14,32 @@ class IntervalHandler {
      * f:        function to call
      * interval: time in milliseconds
      * */
-    let instance = this;
+    let intervalMinutes = interval / (1000 * 60);
+    let id = this.counter;
 
-    function _inner() {
-      f();
-      instance.timers[f] = setTimeout(_inner, interval);
-    }
-    _inner();
+    f();
+
+    chrome.alarms.create(id.toString(), {
+        delayInMinutes: intervalMinutes, // does not allow 0 as a param
+        periodInMinutes: intervalMinutes // repeat
+    });
+
+    chrome.alarms.onAlarm.addListener((alarm) => {
+        if (alarm.name === id.toString()) {
+            f();
+        }
+    });
+
+    return this.counter++;
   }
 
-  removeTimer(f) {
-    clearTimeout(this.timers[f]);
-    delete this.timers[f];
+  removeTimer(id) {
+    chrome.alarms.clear(id.toString());
   }
 
-  updateInterval(f, interval) {
-    this.removeTimer(f);
-    this.callWithInterval(f, interval);
+  updateInterval(id, interval) {
+    this.removeTimer(id);
+    delete this.timers[id];
+    return this.callWithInterval(this.timers[id], interval);
   }
 }

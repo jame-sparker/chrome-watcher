@@ -121,42 +121,51 @@ function checkRequest(url) {
 }
 
 function insertNewInputRow() {
-    let row = `
-    <tr>
-        <td>
-            <input placeholder="https://youtu.be/kT2Gd4V5rrQ" type="text" name="url">
-        </td>
-        <td>
-            <select>
-                <option value="None">None</option>
-                <option value="Tag">Tag</option>
-                <option value="Class">Class</option>
-                <option value="Id">ID</option>
-                <option value="Regex">Regex</option>
-            </select>
-        </td>
-        <td>
-            <input class disabled placeholder="" type="text" name="option">
-        </td>
-        <td>
-            <button class="confirm btn-circle">
-                <svg  class="octicon octicon-check" viewBox="0 0 12 16" version="1.1"  aria-hidden="true">
-                    <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"></path>
-                </svg>
-            </button>
-        </td>
-    </tr>`;
-    insertNewRow(row);
+    chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, (tabs) => {
+        let url = tabs[0].url;
+        if(!url.startsWith('http')) {
+            url = '';
+        }
 
-    let classes = document.getElementsByClassName("confirm");
-    Array.from(classes).forEach((e) =>{
-        e.onclick = confirm;
-    });
+        let row = `
+        <tr>
+            <td>
+                <input placeholder="https://youtu.be/kT2Gd4V5rrQ" value="${url}" type="text" name="url">
+            </td>
+            <td>
+                <select>
+                    <option value="None">None</option>
+                    <option value="Tag">Tag</option>
+                    <option value="Class">Class</option>
+                    <option value="Id">ID</option>
+                    <option value="Regex">Regex</option>
+                </select>
+            </td>
+            <td>
+                <input class disabled placeholder="" type="text" name="option">
+            </td>
+            <td>
+                <button class="confirm btn-circle">
+                    <svg  class="octicon octicon-check" viewBox="0 0 12 16" version="1.1"  aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"></path>
+                    </svg>
+                </button>
+            </td>
+        </tr>`;
+        insertNewRow(row);
 
-    let dropdowns = document.getElementsByTagName('select');
-    Array.from(dropdowns).forEach((e) =>{
-        console.log(e);
-        e.onchange = onDropdownSelect;
+        let classes = document.getElementsByClassName("confirm");
+        Array.from(classes).forEach((e) =>{
+            e.onclick = confirm;
+        });
+
+        let dropdowns = document.getElementsByTagName('select');
+        Array.from(dropdowns).forEach((e) =>{
+            console.log(e);
+            e.onchange = onDropdownSelect;
+        });
+
+
     });
 
 }
